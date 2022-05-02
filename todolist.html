@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <title>Todo List</title>
+    <link rel="icon"  href="https://www.bing.com/th?id=OIP.xpZGQSczA7qFR7PMt1xFAgHaH6&w=241&h=258&c=8&rs=1&qlt=90&o=6&dpr=1.25&pid=3.1&rm=2"/>
+    <style>
+     h2{
+       display: block;
+       margin-left: auto;
+       margin-right: auto;  
+     }
+
+    
+
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">TodoList</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="https://github.com/akkii03" target="_blank">GitHub <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="https://www.linkedin.com/in/akki-indoria-a10728236/" target="_blank">LinkedIn</a>
+                </li>
+              </ul>
+              <h3 id="info">Ayush Indoria</h3>
+            </div>
+          </nav>
+    </header>
+
+    <main>
+
+
+        <div class="container">
+
+          <div class="input-group mb-3 my-4">
+            <input type="text" id="text" class="form-control" placeholder="Enter Data You Want To Add In List" aria-label="Recipient's username" aria-describedby="button-addon2">
+            <div class="input-group-append">
+              <button id="add_btn" class="btn btn-outline-success" type="button" id="button-addon2">ADD</button>
+            </div>
+          </div>
+
+
+          <ul class="list-group list-group-flush " id="mainList">
+            <li class="list-group-item d-flex justify-content-between">
+            </li>
+          </ul>
+
+
+        </div> <!---container ka end-->
+
+
+        <script>
+           let parentList = document.getElementById('mainList');
+          let btn = document.getElementById('add_btn');
+          btn.addEventListener('click',addData);
+          function addData(e) {
+            let inputxt = document.getElementById('text');
+            let userdata = inputxt.value;
+            let msg = document.createElement("h2");
+            msg.classList.add("h2tag");
+
+
+           if(userdata.length<=0) {
+            msg.className = "display:block margin-left:auto margin-right:auto";
+            let listdata = document.getElementById('mainList');
+            msg.textContent = "empty data not add ";
+            listdata.append(msg);
+             
+           }
+          
+
+             else{
+
+              let newList = document.createElement('li');
+                newList.className = "list-group-item d-flex justify-content-between";
+                newList.innerHTML = `  <h3 class="flex-grow-1">${userdata} </h3> <button id="editbtn" class="btn btn-outline-warning mx-4" onclick="edit(this)"> Edit</button>
+              <button id="rmvbtn" class="btn btn-outline-danger"  onclick="remove(this)" >Remove</button>`;
+               parentList.appendChild(newList);
+
+             }
+
+           }
+          
+
+          function remove(currentElement) {
+            if(currentElement.parentElement.length<=0) {
+              let epmtymsg = document.createElement("h2");
+              epmtymsg.textContent = "List is empty !";
+              currentElement.parentElement.append(epmtymsg);
+            }
+            else{
+              currentElement.parentElement.remove();
+            }
+          
+          }
+
+          function edit(currElement) {
+            if(currElement.textContent == "Done") {
+              currElement.textContent = "Edit";
+              let replace = currElement.previousElementSibling.value;
+              let h3tag = document.createElement('h3');
+              h3tag.className = "flex-grow-1"; 
+              h3tag.textContent =  replace;
+              currElement.parentElement.replaceChild(h3tag,currElement.previousElementSibling);
+            }
+             else{
+              currElement.textContent = "Done";
+               let replace = currElement.previousElementSibling.textContent;
+               let newtag = document.createElement('input');
+               replace.type ="text";
+               replace.placeholder = "replace value";
+               replace.className = "form-control";
+               newtag.value = replace;
+               currElement.parentElement.replaceChild(newtag,currElement.previousElementSibling);
+             }
+               
+          }
+
+         
+
+          
+
+
+        </script>
+
+
+    </main>
+</body>
+</html>
