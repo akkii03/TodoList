@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="https://github.com/akkii03" target="_blank">GitHub <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="https://github.com/akkii03/TodoList" target="_blank">GitHub <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item active">
                   <a class="nav-link" href="https://www.linkedin.com/in/akki-indoria-a10728236/" target="_blank">LinkedIn</a>
@@ -62,79 +62,72 @@
         </div> <!---container ka end-->
 
 
-        <script>
-           let parentList = document.getElementById('mainList');
-          let btn = document.getElementById('add_btn');
-          btn.addEventListener('click',addData);
-          function addData(e) {
-            let inputxt = document.getElementById('text');
-            let userdata = inputxt.value;
-            let msg = document.createElement("h2");
-            msg.classList.add("h2tag");
+       <script>
+        
+let parentList = document.getElementById('mainList');
+let btn = document.getElementById('add_btn');
+btn.addEventListener('click',addData);
+function addData(e) {
+ let inputxt = document.getElementById('text');
+ let userdata = inputxt.value;
+ let msg = document.createElement("h2");
+ msg.classList.add("h2tag");
 
 
-           if(userdata.length<=0) {
-            msg.className = "display:block margin-left:auto margin-right:auto";
-            let listdata = document.getElementById('mainList');
-            msg.textContent = "empty data not add ";
-            listdata.append(msg);
-             
-           }
-          
-
-             else{
-
-              let newList = document.createElement('li');
-                newList.className = "list-group-item d-flex justify-content-between";
-                newList.innerHTML = `  <h3 class="flex-grow-1">${userdata} </h3> <button id="editbtn" class="btn btn-outline-warning mx-4" onclick="edit(this)"> Edit</button>
-              <button id="rmvbtn" class="btn btn-outline-danger"  onclick="remove(this)" >Remove</button>`;
-               parentList.appendChild(newList);
-
-             }
-
-           }
-          
-
-          function remove(currentElement) {
-            if(currentElement.parentElement.length<=0) {
-              let epmtymsg = document.createElement("h2");
-              epmtymsg.textContent = "List is empty !";
-              currentElement.parentElement.append(epmtymsg);
-            }
-            else{
-              currentElement.parentElement.remove();
-            }
-          
-          }
-
-          function edit(currElement) {
-            if(currElement.textContent == "Done") {
-              currElement.textContent = "Edit";
-              let replace = currElement.previousElementSibling.value;
-              let h3tag = document.createElement('h3');
-              h3tag.className = "flex-grow-1"; 
-              h3tag.textContent =  replace;
-              currElement.parentElement.replaceChild(h3tag,currElement.previousElementSibling);
-            }
-             else{
-              currElement.textContent = "Done";
-               let replace = currElement.previousElementSibling.textContent;
-               let newtag = document.createElement('input');
-               replace.type ="text";
-               replace.placeholder = "replace value";
-               replace.className = "form-control";
-               newtag.value = replace;
-               currElement.parentElement.replaceChild(newtag,currElement.previousElementSibling);
-             }
-               
-          }
-
-         
-
-          
+if(userdata=="") {
+ return;
+}
 
 
-        </script>
+  else{
+
+   let newList = document.createElement('li');
+     newList.className = "list-group-item d-flex justify-content-between";
+     newList.innerHTML = `  <h3 class="flex-grow-1">${userdata} </h3> <button id="editbtn" class="btn btn-outline-warning mx-4" onclick="edit(this)"> Edit</button>
+   <button id="rmvbtn" class="btn btn-outline-danger"  onclick="remove(this)" >Remove</button>`;
+    parentList.appendChild(newList);
+
+  }
+
+}
+
+
+function remove(currentElement) {
+ if(currentElement.parentElement.length<=0) {
+   let epmtymsg = document.createElement("h2");
+   epmtymsg.textContent = "List is empty !";
+   currentElement.parentElement.append(epmtymsg);
+ }
+ else{
+   currentElement.parentElement.remove();
+ }
+
+}
+
+function edit(currElement) {
+ if(currElement.textContent == "Done") {
+   currElement.textContent = "Edit";
+   let replace = currElement.previousElementSibling.value;
+   let h3tag = document.createElement('h3');
+   h3tag.className = "flex-grow-1"; 
+   h3tag.textContent =  replace;
+   currElement.parentElement.replaceChild(h3tag,currElement.previousElementSibling);
+ }
+  else{
+   currElement.textContent = "Done";
+    let replace = currElement.previousElementSibling.textContent;
+    let newtag = document.createElement('input');
+    replace.type ="text";
+    replace.placeholder = "replace value";
+    replace.className = "form-control";
+    newtag.value = replace;
+    currElement.parentElement.replaceChild(newtag,currElement.previousElementSibling);
+  }
+    
+}
+
+
+       </script>
 
 
     </main>
